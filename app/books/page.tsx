@@ -1,0 +1,27 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { BookCover, PageTitle, btn } from "@/components/site";
+import { books } from "@/lib/content";
+
+export const metadata: Metadata = { title: "Books" };
+
+export default function BooksPage() {
+  return (
+    <main>
+      <PageTitle eyebrow="Published works" title="Books" />
+      <div className="mx-auto max-w-4xl divide-y px-5 py-12">
+        {books.map((b) => (
+          <article key={b.slug} className="grid items-center gap-8 py-12 sm:grid-cols-[auto_1fr]">
+            <BookCover book={b} className="mx-auto w-44" />
+            <div>
+              <p className="text-lg text-muted-foreground">{b.subtitle} · {b.year}</p>
+              <h2 className="mt-1 font-heading text-4xl leading-tight">{b.title}</h2>
+              <p className="mt-4 text-xl leading-relaxed">{b.summary}</p>
+              <Link href={`/books/${b.slug}`} className={`${btn()} mt-6`}>View book details</Link>
+            </div>
+          </article>
+        ))}
+      </div>
+    </main>
+  );
+}

@@ -1,69 +1,124 @@
-import Image from "next/image";
+import { Play, Star } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { BookCover, Placeholder, Prose, btn } from "@/components/site";
+import {
+  aboutAuthor, aboutBook, author, book, bookAvailable, closing, life, media, press, reviews, welcome,
+} from "@/lib/content";
+
+function Section({ id, eyebrow, title, children, muted }: {
+  id?: string; eyebrow?: string; title?: string; children: React.ReactNode; muted?: boolean;
+}) {
+  return (
+    <section id={id} className={cn("scroll-mt-32 px-5 py-20 md:py-24", muted && "bg-muted")}>
+      <div className="mx-auto max-w-3xl">
+        {eyebrow && <p className="text-lg font-semibold text-primary">{eyebrow}</p>}
+        {title && <h2 className="mt-2 font-heading text-4xl leading-tight md:text-5xl">{title}</h2>}
+        <div className="mt-6">{children}</div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <main>
+        {/* Hero */}
+        <section className="px-5 py-20 text-center md:py-28">
+          <h1 className="font-heading text-5xl leading-tight md:text-7xl">{book.title}</h1>
+          <p className="mt-3 text-2xl text-muted-foreground">{book.subtitle}</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="#book" className={btn("outline")}>Learn more</a>
+            <a href={book.buyLinks[0].href} className={btn()}>Buy now</a>
+          </div>
+          <div className="mt-14 flex items-end justify-center gap-4">
+            <BookCover book={book} className="w-44 -rotate-6 opacity-80 md:w-56" />
+            <BookCover book={book} className="w-52 md:w-64" />
+          </div>
+        </section>
+
+        <Section eyebrow={welcome.eyebrow} muted>
+          <Prose paragraphs={welcome.paragraphs} closing={welcome.closing} />
+        </Section>
+
+        <Section id="author" eyebrow={aboutAuthor.eyebrow}>
+          <Placeholder label="Author photo" className="aspect-[4/5] w-full max-w-sm" />
+          <h2 className="mt-10 font-heading text-4xl md:text-5xl">{author.name}</h2>
+          <div className="mt-5"><Prose paragraphs={aboutAuthor.paragraphs} /></div>
+          <a href={aboutAuthor.href} className={cn(btn(), "mt-8")}>Learn more</a>
+        </Section>
+
+        <section id="media" className="scroll-mt-32 bg-foreground px-5 py-16">
+          <div className="mx-auto max-w-5xl">
+            {media.videoUrl ? (
+              <iframe src={media.videoUrl} title="Video" allowFullScreen className="aspect-video w-full rounded-lg" />
+            ) : (
+              <div className="flex aspect-video w-full items-center justify-center rounded-lg bg-black/40 text-background">
+                <Play className="size-20" aria-label="Video coming soon" />
+              </div>
+            )}
+          </div>
+        </section>
+
+        <Section id="book" eyebrow={aboutBook.eyebrow}>
+          <Placeholder label="Book mood image" className="aspect-[3/2] w-full" />
+          <div className="mt-10"><Prose paragraphs={aboutBook.paragraphs} /></div>
+          <a href={aboutBook.href} className={cn(btn(), "mt-8")}>Learn more</a>
+        </Section>
+
+        <Section eyebrow={bookAvailable.eyebrow} title={book.title} muted>
+          <div className="grid items-center gap-10 md:grid-cols-[auto_1fr]">
+            <BookCover book={book} className="mx-auto w-48" />
+            <div>
+              <Prose paragraphs={bookAvailable.paragraphs} />
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a href={book.buyLinks[0].href} className={btn()}>Buy now</a>
+                <Link href={`/books/${book.slug}`} className={btn("outline")}>Book details</Link>
+              </div>
+            </div>
+          </div>
+        </Section>
+
+        <Section title={life.title}>
+          <Placeholder label="Lifestyle image" className="aspect-[3/2] w-full" />
+          <div className="mt-10"><Prose paragraphs={life.paragraphs} /></div>
+          <a href={life.href} className={cn(btn(), "mt-8")}>Learn more</a>
+        </Section>
+
+        <section className="bg-muted px-5 py-20 md:py-24">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-lg font-semibold text-primary">Book reviews</p>
+            <h2 className="mt-2 font-heading text-4xl md:text-5xl">What readers are saying</h2>
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {reviews.map((r) => (
+                <article key={r.title} className="rounded-lg border bg-card p-7">
+                  <h3 className="font-heading text-2xl font-semibold leading-snug">{r.title}</h3>
+                  <div className="mt-3 flex gap-1 text-amber-500" aria-label="5 out of 5 stars">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="size-6 fill-current" />)}
+                  </div>
+                  <p className="mt-4 text-lg leading-relaxed">{r.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <Section id="press" eyebrow={press.eyebrow}>
+          <div className="flex flex-wrap items-end justify-center gap-6">
+            <Placeholder label="Author photo" className="mx-0 aspect-[4/5] w-full max-w-xs" />
+            <BookCover book={book} className="w-36" />
+          </div>
+          <div className="mt-10"><Prose paragraphs={press.paragraphs} /></div>
+          <a href={press.href} className={cn(btn(), "mt-8")}>View full article</a>
+        </Section>
+
+        <Section id="contact" eyebrow={closing.eyebrow} muted>
+          <Prose paragraphs={closing.paragraphs} closing={closing.closing} />
+          <Link href="/contact" className={cn(btn(), "mt-8")}>Connect now</Link>
+        </Section>
       </main>
-    </div>
+
+    </>
   );
 }
