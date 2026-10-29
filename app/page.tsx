@@ -5,9 +5,10 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { Reveal } from "@/components/reveal";
+import { VideoSlot } from "@/components/video-slot";
 import { AmazonButton, BookCover, Prose, SceneBg, btn } from "@/components/site";
 import {
-  aboutAuthor, aboutBook, author, book, books, closing, life, press, reviews, welcome,
+  aboutAuthor, author, books, closing, life, press, reviews, video, welcome,
 } from "@/lib/content";
 
 export const metadata: Metadata = { alternates: { canonical: "/" } };
@@ -36,24 +37,16 @@ export default function Home() {
       <HeroCarousel books={books} />
 
       {/* Welcome, on white */}
-      <section className="px-5 py-20 md:py-28">
-        <Row
-          flip
-          media={
-            <div className="relative h-80 w-72 md:h-96 md:w-80">
-              {books.slice(0, 3).map((b, i) => (
-                <BookCover
-                  key={b.slug}
-                  book={b}
-                  className={cn("absolute w-44 md:w-52", ["left-0 top-6 -rotate-6", "right-0 top-6 rotate-6", "left-1/2 top-0 -translate-x-1/2"][i])}
-                />
-              ))}
-            </div>
-          }
-        >
+      <section className="px-5 py-20 text-center md:py-28">
+        <Reveal className="mx-auto max-w-3xl">
           <Eyebrow>{welcome.eyebrow}</Eyebrow>
-          <div className="mt-4"><Prose paragraphs={welcome.paragraphs} closing={welcome.closing} /></div>
-        </Row>
+          <div className="mt-6"><Prose paragraphs={welcome.paragraphs} closing={welcome.closing} /></div>
+        </Reveal>
+      </section>
+
+      {/* Featured video, edge to edge */}
+      <section aria-label={video.title} className="bg-black">
+        <VideoSlot url={video.url} title={video.title} poster={video.poster} className="max-h-[85vh] rounded-none shadow-none" />
       </section>
 
       {/* Author, on a mint band like the reference site */}
@@ -63,20 +56,6 @@ export default function Home() {
           <h2 className="mt-2 font-heading text-4xl md:text-5xl">{author.name}</h2>
           <div className="mt-5"><Prose paragraphs={aboutAuthor.paragraphs} /></div>
           <Link href={aboutAuthor.href} className={cn(btn(), "mt-8")}>See my books</Link>
-        </Row>
-      </section>
-
-      {/* About the featured book */}
-      <section id="book" className="scroll-mt-32 px-5 py-20 md:py-28">
-        <Row flip media={<BookCover book={book} className="w-60 md:w-72" />}>
-          <Eyebrow>{aboutBook.eyebrow}</Eyebrow>
-          <h2 className="mt-2 font-heading text-4xl leading-tight md:text-5xl">{book.title}</h2>
-          <p className="mt-2 text-xl text-muted-foreground">{book.subtitle}</p>
-          <div className="mt-6"><Prose paragraphs={aboutBook.paragraphs} /></div>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <AmazonButton href={book.buyLinks[0].href} label={book.buyLinks[0].label} />
-            <Link href={`/books/${book.slug}`} className={btn("outline")}>Book details</Link>
-          </div>
         </Row>
       </section>
 

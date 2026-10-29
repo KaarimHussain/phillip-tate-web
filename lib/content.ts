@@ -146,17 +146,23 @@ export const books: Book[] = [
   },
 ];
 
-// The featured book on the homepage. Change the slug to feature a different one.
-export const book = books.find((b) => b.slug === "breach-of-trust")!;
-
 export const welcome = {
   eyebrow: "Welcome",
+  // TODO: have Philip approve this wording; it's written in his voice from his bio.
   paragraphs: [
-    "Every place has its secrets, and every person carries a story worth telling.",
-    "My name is Philip Tate. I write mountain tales, mysteries, adventures, and serious books about the world we live in.",
-    "Here you'll find a Civil War mystery set in old Asheville, a suspense novel set in a small, close-knit community, a fishing adventure, and a close look at China's growing navy.",
+    "Thank you for stopping by. I'm Philip Tate, a storyteller, a minister, and a lifelong friend of the North Carolina mountains.",
+    "I've always believed that every place has its secrets and every person carries a story worth telling. Writing is how I pass those stories on.",
+    "This is my corner of the web, where you can get to know me a little and see what I've been working on.",
   ],
   closing: "Pull up a chair. There's a story waiting.",
+};
+
+// Featured video in the Welcome section. Paste a YouTube link (any format) or an MP4 path
+// such as "/videos/welcome.mp4" (file in public/videos). Leave empty to show "coming soon".
+export const video = {
+  url: "",
+  title: "A word from Philip",
+  poster: "/scenes/blue-ridge.webp",
 };
 
 export const aboutAuthor = {
@@ -167,11 +173,6 @@ export const aboutAuthor = {
     "My wife Kay and I live between Marion and Linville. When I'm not writing, you'll find me trout fishing or picking bluegrass guitar.",
   ],
   href: "/books",
-};
-
-export const aboutBook = {
-  eyebrow: "About the book",
-  paragraphs: book.description,
 };
 
 export const life = {
