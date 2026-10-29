@@ -1,10 +1,11 @@
-// All site copy lives here. Placeholder text — swap in Phillip's real content.
-// Section order mirrors the homepage, top to bottom.
+// All site copy lives here. Section order mirrors the homepage, top to bottom.
+// Book facts come from Amazon/Goodreads listings (Oct 2026). Anything still marked TODO needs Philip's input.
 
 export const author = {
-  name: "Phillip Tate",
-  roles: "Author · Speaker · Storyteller",
-  email: "hello@philliptate.com",
+  name: "Philip Tate",
+  roles: "Author · Minister · Storyteller",
+  email: "hello@philiptate.com", // TODO: real contact email
+  photo: "/philip-tate.png",
 };
 
 export const nav = [
@@ -20,178 +21,216 @@ export type Book = {
   slug: string;
   title: string;
   subtitle: string;
-  year: number;
+  genre: string;
+  cover?: string;
   summary: string;
   description: string[];
   details: { label: string; value: string }[];
   buyLinks: { label: string; href: string }[];
 };
 
+// Newest first.
 export const books: Book[] = [
   {
-    slug: "the-weight-of-small-hours",
-    title: "The Weight of Small Hours",
-    subtitle: "A Memoir",
-    year: 2025,
-    summary: "A true story of family, loss, and finding the courage to speak after years of silence.",
+    slug: "thwarted-enemy",
+    title: "Thwarted Enemy",
+    subtitle: "The Chosen's Atonement",
+    genre: "Fiction",
+    cover: "https://m.media-amazon.com/images/I/71MI+d2FALL._SL1500_.jpg",
+    summary: "The newest book from Philip J. Tate, available now on Kindle.",
     description: [
-      "The Weight of Small Hours is a journey through family secrets, old patterns, and the cost of pretending everything is fine.",
-      "It follows one man's path from a difficult childhood into adulthood, where success on paper could not heal what was hidden.",
-      "It is a book about breaking cycles, facing the truth, and finding the courage to finally speak.",
+      // TODO: Amazon blocked the product page; paste the official book description here.
+      "Thwarted Enemy: The Chosen's Atonement is Philip's newest release. A full description is coming soon.",
     ],
     details: [
-      { label: "Published", value: "2025" },
-      { label: "Pages", value: "312" },
-      { label: "Genre", value: "Memoir" },
-      { label: "Formats", value: "Paperback, eBook, Audiobook" },
-      { label: "ISBN", value: "000-0-00-000000-0" },
+      { label: "Author", value: "Philip J. Tate" },
+      { label: "Format", value: "Kindle eBook" },
+    ],
+    buyLinks: [{ label: "Kindle on Amazon", href: "https://www.amazon.com/dp/B0HMD6QWFD" }],
+  },
+  {
+    slug: "rizzoes-landing",
+    title: "Rizzoes' Landing",
+    subtitle: "A Novel of Suspense",
+    genre: "Mystery & Suspense",
+    cover: "https://m.media-amazon.com/images/I/81VLIp1DnXL._SL1500_.jpg",
+    summary: "In a small, close-knit community, a run of unsettling events brings long-hidden truths into the light.",
+    description: [
+      "Something is wrong in a small, close-knit community. One unsettling event follows another, and the secrets people have kept for years begin to surface.",
+      "As relationships strain and the line between right and wrong blurs, Rizzoes' Landing becomes a story of suspense, betrayal, and redemption.",
+    ],
+    details: [
+      { label: "Author", value: "Philip J. Tate" },
+      { label: "Published", value: "April 1, 2026" },
+      { label: "Publisher", value: "Prestige Author House" },
+      { label: "Pages", value: "231" },
+      { label: "Formats", value: "Paperback, Kindle eBook" },
+      { label: "ISBN", value: "979-8995329121" },
     ],
     buyLinks: [
-      { label: "Amazon", href: "#" },
-      { label: "Barnes & Noble", href: "#" },
-      { label: "Bookshop.org", href: "#" },
+      { label: "Paperback on Amazon", href: "https://www.amazon.com/dp/B0GW14PCJR" },
+      { label: "Kindle on Amazon", href: "https://www.amazon.com/dp/B0FHYR8SW9" },
     ],
   },
   {
-    slug: "letters-from-the-porch",
-    title: "Letters from the Porch",
-    subtitle: "Essays",
-    year: 2022,
-    summary: "Short, warm essays about small towns, old friends, and the lessons that arrive late.",
+    slug: "chinas-global-naval-ambitions",
+    title: "China's Global Naval Ambitions",
+    subtitle: "And Her Unstoppable Rise to Power",
+    genre: "Nonfiction · Defense",
+    cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1790754985i/260016753.jpg",
+    summary: "A look at China's growing navy: its ports, its economic strategy, and what its rise means for the world.",
     description: [
-      "Letters from the Porch gathers twenty essays written over a decade of quiet evenings.",
-      "Funny, tender, and honest, they are about the people who shape us and the places we keep coming back to.",
+      "China's Global Naval Ambitions follows a nation reviving centuries-old seafaring traditions and building one of the largest navies in the world.",
+      "Philip traces China's naval development, its network of ports, and the economic and political goals behind its expansion, and asks what that rise means for the United States and its allies.",
     ],
     details: [
-      { label: "Published", value: "2022" },
-      { label: "Pages", value: "198" },
-      { label: "Genre", value: "Essays" },
-      { label: "Formats", value: "Paperback, eBook" },
-      { label: "ISBN", value: "000-0-00-000000-1" },
+      { label: "Author", value: "Philip Tate" },
+      { label: "Published", value: "December 2025" },
+      { label: "Pages", value: "247 (Kindle)" },
+      { label: "Formats", value: "Paperback, Kindle eBook" },
+      { label: "ISBN", value: "979-8277609934 (paperback)" },
     ],
-    buyLinks: [{ label: "Amazon", href: "#" }],
+    buyLinks: [
+      { label: "Paperback on Amazon", href: "https://www.amazon.com/dp/B0G8GJFZLP" },
+      { label: "Kindle on Amazon", href: "https://www.amazon.com/dp/B0G57Z73SN" },
+    ],
+  },
+  {
+    slug: "singing-reels-sunburn",
+    title: "Singing Reels",
+    subtitle: "Sunburn",
+    genre: "Adventure",
+    cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1760017254i/242571388.jpg",
+    summary: "A short fishing adventure from a lifelong angler.",
+    description: [
+      // TODO: Amazon blocked the product page; paste the official book description here.
+      "Singing Reels: Sunburn is a short adventure story from a writer who grew up fishing the rivers and lakes of the Catawba River Valley. A full description is coming soon.",
+    ],
+    details: [
+      { label: "Author", value: "Philip Tate" },
+      { label: "Published", value: "October 8, 2025" },
+      { label: "Pages", value: "46" },
+      { label: "Formats", value: "Paperback, Kindle eBook" },
+    ],
+    buyLinks: [{ label: "Kindle on Amazon", href: "https://www.amazon.com/dp/B0FV5DXBY1" }],
+  },
+  {
+    slug: "breach-of-trust",
+    title: "Breach of Trust",
+    subtitle: "A Tale of Asheville in the Civil War",
+    genre: "Historical Fiction",
+    cover: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1752671609i/226744988.jpg",
+    summary: "Asheville, 1860. On the eve of secession, a banker hides gold stolen from his own vault, and a mysterious death follows.",
+    description: [
+      "Asheville, North Carolina, 1860. The country is on the edge of war, and the mountain town is divided.",
+      "When a respected banker steals gold from his own vault and hides it away, he sets off a chain of events that ends in a murder under mysterious circumstances.",
+      "Rooted in the Blue Ridge Mountains Philip has known all his life, Breach of Trust is a story of greed, loyalty, and secrets in a community torn apart by the Civil War.",
+    ],
+    details: [
+      { label: "Author", value: "Philip Tate" },
+      { label: "Published", value: "February 2025" },
+      { label: "Pages", value: "186" },
+      { label: "Formats", value: "Hardcover, Paperback, Kindle eBook" },
+      { label: "ISBN", value: "979-8895699744 (paperback)" },
+    ],
+    buyLinks: [
+      { label: "Paperback on Amazon", href: "https://www.amazon.com/dp/B0DRPSG3H4" },
+      { label: "Kindle on Amazon", href: "https://www.amazon.com/dp/B0DWK281L9" },
+    ],
   },
 ];
 
-// The featured book on the homepage.
-export const book = books[0];
+// The featured book on the homepage. Change the slug to feature a different one.
+export const book = books.find((b) => b.slug === "breach-of-trust")!;
 
 export const welcome = {
   eyebrow: "Welcome",
   paragraphs: [
-    "Some places look perfect from the outside.",
-    "Quiet streets. Tidy gardens. Friendly waves across the fence.",
-    "But what people rarely talk about is what can live beneath the surface of a life that looks fine to everyone else.",
-    "My name is Phillip Tate, and The Weight of Small Hours is my true story. It is a memoir about family, loss, and finding my way back after years of keeping quiet.",
+    "I grew up in the foothills of the Blue Ridge Mountains, in the countryside of the Catawba River Valley.",
+    "Woodlands, trout streams, and the waters that feed Lake James. Front porches and long stories.",
+    "Those hills taught me that every place has its secrets, and every person carries a story worth telling.",
+    "My name is Philip Tate. I write mountain tales, mysteries, adventures, and serious books about the world we live in.",
   ],
-  closing: "This book is where the silence ends.",
+  closing: "Pull up a chair. There's a story waiting.",
 };
 
 export const aboutAuthor = {
   eyebrow: "From the author",
   paragraphs: [
-    "I am Phillip Tate, a memoir author and longtime storyteller whose work explores resilience, recovery, and the realities that often sit beneath outward success. I was born in Placeholder Town, the youngest of five children.",
-    "For more than thirty years I worked as a placeholder professional, an experience that gave me a rare view of the difference between how lives look and how they feel.",
-    "My memoir, The Weight of Small Hours, reached #1 in its category on Amazon. It is an honest account of hardship and healing, written with warmth and a little humor.",
+    "I was born in Atlanta, Georgia, and lived in Sandy Springs until I was five, when my family moved to Marion, North Carolina, 45 miles east of Asheville. I grew up hunting and fishing the woods and waters of the Catawba River Valley, and I was active in Boy Scouts and all things high school.",
+    "At UNC Chapel Hill I was introduced to literature, law, geology, history, and politics, and I served in Navy ROTC as a Midshipman. After graduating I joined my family's insurance business.",
+    "Over the years I served with the Red Cross, EMS, and as a paramedic, and on hospital, school, and church boards. Later in my career I was called to ministry, and I am now in my ninth year as a Methodist minister.",
+    "My wife Kay and I live between Marion and Land Harbor in Linville. When I'm not writing, you'll find me trout fishing, playing golf, tennis, or pickleball, taking photographs, studying rocks, picking bluegrass guitar, or on the ham radio.",
   ],
-  href: "#",
-};
-
-export const media = {
-  // Paste a YouTube embed URL here when there's a real video, e.g. https://www.youtube.com/embed/VIDEO_ID
-  videoUrl: "",
+  href: "/books",
 };
 
 export const aboutBook = {
-  eyebrow: "About the memoir",
-  paragraphs: [
-    "The Weight of Small Hours is a journey through family secrets, old patterns, and the cost of pretending everything is fine.",
-    "It is a story of survival, and a story of reckoning.",
-    "If you have ever carried pain behind a smile, or wondered why the past still echoes, this story was written with you in mind.",
-  ],
-  href: "#",
-};
-
-export const bookAvailable = {
-  eyebrow: "Book available now",
-  paragraphs: [
-    "The Weight of Small Hours follows one man's journey from a difficult childhood into adulthood, where success on paper could not heal what was hidden.",
-    "It is a book about breaking cycles, facing the truth, and finding the courage to finally speak.",
-  ],
-  href: "#",
+  eyebrow: "About the book",
+  paragraphs: book.description,
 };
 
 export const life = {
-  title: "A Life of Creativity, Recovery, and Purpose",
+  title: "A Life of Service, Faith, and Story",
   paragraphs: [
-    "For decades my work has been about people, about listening to what isn't said out loud.",
-    "Beyond writing, I speak to community groups, support local libraries, and volunteer with recovery programs across the region.",
-    "Everything I do comes back to the same purpose: giving voice to what is too often left unspoken.",
+    "Before I was a writer, I was an insurance agent, a paramedic, a school board member, and a neighbor. Those years put me beside people on their best days and their hardest ones.",
+    "Today I serve as a Methodist minister, and I write books of all kinds: mountain tales, mysteries, adventures, books for young readers, and serious books on defense and world affairs.",
+    "Every story comes back to the people and places of these mountains.",
   ],
-  href: "#",
 };
 
-export const reviews = [
-  { title: "Honest and Unforgettable", text: "A quietly powerful book that stayed with me for weeks. Tate writes about family and grief with rare grace and honesty." },
-  { title: "I Couldn't Put It Down", text: "Funny, heartbreaking, and true. I recognized my own family in these pages and finished it in two evenings." },
-  { title: "A Book to Share", text: "The kind of memoir you press into a friend's hands and say: read this. Our book club talked about it for hours." },
-];
+// TODO: add real reader reviews (with permission). The reviews section stays hidden while this is empty.
+export const reviews: { title: string; text: string; name?: string }[] = [];
 
 export const press = {
-  eyebrow: "Press release",
+  eyebrow: "In the news",
+  source: "The McDowell News",
   paragraphs: [
-    "PLACEHOLDER TOWN — Local author Phillip Tate has announced the release of his memoir, The Weight of Small Hours, now available in local bookstores.",
-    "Tate opens his memoir by describing how hurt and silence can pass quietly from one generation to the next, until someone finally decides to break the cycle.",
-    "His writing is straightforward, emotional, and humorous in a warm, self-aware way.",
+    "The McDowell News featured Marion author Philip Tate ahead of a book signing for Breach of Trust, his novel set in Asheville during the Civil War.",
+    "The article describes Philip's years as an independent insurance agent, a paramedic, and a member of the McDowell County Board of Education, and his ministry at East Marion United Methodist Church.",
   ],
-  href: "#",
+  href: "https://mcdowellnews.com/life-entertainment/local/events/article_c04fca73-27b9-4968-8a88-211559940265.html",
 };
 
 export const closing = {
   eyebrow: "Explore the site",
   paragraphs: [
-    "This website is a home for my life's work.",
-    "A place for readers, survivors, and anyone looking for honesty and healing.",
-    "Here you can learn more about the book, watch interviews, and read news and articles.",
-    "Thank you for being here.",
+    "This website is a home for my books and the stories behind them.",
+    "Here you can learn about each book, read reflections on the blog, and find out about signings and events.",
+    "Thank you for stopping by.",
   ],
-  closing: "Some stories are meant to be heard.",
+  closing: "Some stories are meant to be told.",
 };
 
 export type Post = { slug: string; title: string; date: string; excerpt: string; body: string[] };
 
+// TODO: sample posts. Replace with Philip's own writing before launch.
 export const posts: Post[] = [
   {
-    slug: "why-i-finally-wrote-it-down",
-    title: "Why I Finally Wrote It Down",
+    slug: "writing-breach-of-trust",
+    title: "Writing Breach of Trust",
     date: "October 12, 2026",
-    excerpt: "For thirty years I told myself the past was better left alone. Here is what changed my mind.",
+    excerpt: "How the history of Asheville on the eve of the Civil War became the setting for a mystery.",
     body: [
-      "For thirty years I told myself the past was better left alone. Talking about it felt like reopening a door I had worked hard to close.",
-      "Then one morning, a letter arrived. It was short, and it changed everything.",
-      "Writing this book was not easy. But I have learned that the stories we keep to ourselves still shape us, whether we tell them or not.",
+      "Sample post. Philip can share here how Breach of Trust began, and what drew him to Asheville in 1860.",
     ],
   },
   {
-    slug: "what-readers-taught-me",
-    title: "What Readers Have Taught Me",
+    slug: "stories-from-the-river",
+    title: "Stories from the River",
     date: "September 3, 2026",
-    excerpt: "The letters I've received since the book came out have been the greatest gift of all.",
+    excerpt: "Trout streams, singing reels, and the stories that come from a life spent on the water.",
     body: [
-      "Since the book came out, I have received hundreds of letters from readers.",
-      "Many begin the same way: \"I thought I was the only one.\"",
-      "Those words remind me why stories matter. They help us feel less alone.",
+      "Sample post. A place for fishing stories and the background to Singing Reels.",
     ],
   },
   {
-    slug: "a-note-on-book-clubs",
+    slug: "a-note-for-book-clubs",
     title: "A Note for Book Clubs",
     date: "August 18, 2026",
-    excerpt: "A few questions to guide your group's conversation, and how to invite me to join.",
+    excerpt: "Questions to guide your group's conversation, and how to invite Philip to join.",
     body: [
-      "I love hearing from book clubs. If your group is reading the book, here are a few questions to start the conversation.",
-      "What did silence protect in this family, and what did it cost? Which moment stayed with you the most?",
-      "If you would like me to join your meeting in person or by video call, please get in touch through the contact page.",
+      "Sample post. Discussion questions for book clubs, and an invitation to get in touch through the contact page.",
     ],
   },
 ];

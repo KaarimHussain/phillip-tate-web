@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Reveal } from "@/components/reveal";
 import { PageTitle } from "@/components/site";
 import { posts } from "@/lib/content";
 
-export const metadata: Metadata = { title: "Blog" };
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Reflections from author Philip Tate on writing, the Blue Ridge Mountains, fishing, and faith.",
+  alternates: { canonical: "/blog" },
+};
 
 export default function BlogPage() {
   return (
@@ -11,7 +16,7 @@ export default function BlogPage() {
       <PageTitle eyebrow="Reflections" title="Blog" intro="Thoughts on writing, family, and healing." />
       <div className="mx-auto max-w-3xl divide-y px-5 py-8">
         {posts.map((p) => (
-          <article key={p.slug} className="py-10">
+          <Reveal key={p.slug}><article className="py-10">
             <p className="text-lg text-muted-foreground">{p.date}</p>
             <h2 className="mt-1 font-heading text-3xl leading-tight">
               <Link href={`/blog/${p.slug}`} className="hover:text-primary hover:underline underline-offset-4">{p.title}</Link>
@@ -20,7 +25,7 @@ export default function BlogPage() {
             <Link href={`/blog/${p.slug}`} className="mt-4 inline-block text-lg font-semibold text-primary underline underline-offset-4">
               Read more →
             </Link>
-          </article>
+          </article></Reveal>
         ))}
       </div>
     </main>

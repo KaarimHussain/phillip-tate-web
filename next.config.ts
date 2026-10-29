@@ -1,4 +1,8 @@
 import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+// Webpack builds: `ANALYZE=true npm run build`. Turbopack (default): `npm run analyze`.
+const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.ANALYZE === "true" });
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -6,6 +10,8 @@ const nextConfig: NextConfig = {
     agentFeedback: true,
   },
   cacheComponents: true,
+  // Book covers are served from Amazon's image CDN.
+  images: { remotePatterns: [new URL("https://m.media-amazon.com/images/**")] },
   partialPrefetching: true,
   turbopack: {
     rules: {
@@ -17,4 +23,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

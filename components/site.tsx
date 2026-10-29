@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/reveal";
 import { author, nav, type Book } from "@/lib/content";
 
 export const btn = (variant: "default" | "outline" = "default") =>
@@ -34,9 +36,11 @@ export function SiteFooter() {
 export function PageTitle({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string }) {
   return (
     <div className="bg-muted px-5 py-16 text-center md:py-20">
-      {eyebrow && <p className="text-lg font-semibold text-primary">{eyebrow}</p>}
-      <h1 className="mt-2 font-heading text-5xl leading-tight md:text-6xl">{title}</h1>
-      {intro && <p className="mx-auto mt-4 max-w-2xl text-xl text-muted-foreground">{intro}</p>}
+      <Reveal>
+        {eyebrow && <p className="text-lg font-semibold text-primary">{eyebrow}</p>}
+        <h1 className="mt-2 font-heading text-5xl leading-tight md:text-6xl">{title}</h1>
+        {intro && <p className="mx-auto mt-4 max-w-2xl text-xl text-muted-foreground">{intro}</p>}
+      </Reveal>
     </div>
   );
 }
@@ -59,7 +63,15 @@ export function Prose({ paragraphs, closing }: { paragraphs: string[]; closing?:
   );
 }
 
-export function BookCover({ book, className }: { book: Book; className?: string }) {
+export function BookCover({ book, className, preload }: { book: Book; className?: string; preload?: boolean }) {
+  if (book.cover) {
+    return (
+      <div className={cn("relative aspect-[2/3] overflow-hidden rounded-r-md shadow-xl", className)}>
+        <Image src={book.cover} alt={`Cover of ${book.title}`} fill sizes="300px" preload={preload} className="object-cover" />
+      </div>
+    );
+  }
+  // ponytail: drawn cover for books we have no cover image for yet.
   return (
     <div className={cn("aspect-[2/3] rounded-r-md bg-primary p-5 text-center text-primary-foreground shadow-xl", className)}>
       <div className="flex h-full flex-col justify-between border border-white/30 p-3">
@@ -69,4 +81,9 @@ export function BookCover({ book, className }: { book: Book; className?: string 
       </div>
     </div>
   );
+}
+
+// Structured data for search engines. `<` is escaped so content can't break out of the script tag.
+export function JsonLd({ data }: { data: object }) {
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />;
 }
