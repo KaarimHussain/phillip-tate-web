@@ -4,8 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/app/loading";
 import type { Book as BookLd, WithContext } from "schema-dts";
-import { Reveal } from "@/components/reveal";
-import { BookCover, JsonLd, Prose, btn } from "@/components/site";
+import { AmazonButton, BookCover, JsonLd, Prose } from "@/components/site";
 import { author, books, reviews } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -56,26 +55,29 @@ async function BookDetail({ params }: { params: PageProps<"/books/[slug]">["para
   };
 
   return (
-    <main className="mx-auto max-w-5xl px-5 py-16">
+    <main>
       <JsonLd data={ld} />
-      <Link href="/books" className="text-lg underline underline-offset-4">← All books</Link>
+      <section className="bg-mint px-5 py-14 md:py-20">
+        <div className="mx-auto max-w-5xl">
+          <Link href="/books" className="text-lg underline underline-offset-4">← All books</Link>
+          <div className="mt-10 grid gap-12 md:grid-cols-[auto_1fr]">
+            <BookCover book={b} className="mx-auto w-64" preload />
+            <div>
+              <p className="text-lg font-semibold tracking-wide text-primary uppercase">{b.genre}</p>
+              <h1 className="mt-2 font-heading text-5xl leading-tight">{b.title}</h1>
+              <p className="mt-2 text-2xl">{b.subtitle}</p>
+              <p className="mt-4 text-xl text-muted-foreground">{b.summary}</p>
 
-      <div className="mt-10 grid gap-12 md:grid-cols-[auto_1fr]">
-        <Reveal><BookCover book={b} className="mx-auto w-64" preload /></Reveal>
-        <div>
-          <p className="text-lg font-semibold text-primary">{b.genre}</p>
-          <h1 className="mt-2 font-heading text-5xl leading-tight">{b.title}</h1>
-          <p className="mt-2 text-2xl">{b.subtitle}</p>
-          <p className="mt-4 text-xl text-muted-foreground">{b.summary}</p>
-
-          <h2 className="mt-10 font-heading text-2xl font-semibold">Buy this book</h2>
-          <div className="mt-4 flex flex-wrap gap-4">
-            {b.buyLinks.map((l, i) => (
-              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className={btn(i === 0 ? "default" : "outline")}>{l.label}</a>
-            ))}
+              <h2 className="mt-10 font-heading text-2xl font-semibold">Buy this book</h2>
+              <div className="mt-4 flex flex-wrap gap-4">
+                {b.buyLinks.map((l) => <AmazonButton key={l.label} href={l.href} label={l.label} />)}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <div className="mx-auto max-w-5xl px-5 pb-16">
 
       <section className="mt-16 grid gap-12 md:grid-cols-[1.6fr_1fr]">
         <div>
@@ -104,6 +106,7 @@ async function BookDetail({ params }: { params: PageProps<"/books/[slug]">["para
           ))}
         </div>
       </section>}
+      </div>
     </main>
   );
 }

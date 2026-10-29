@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function BooksPage() {
   return (
     <main>
-      <PageTitle eyebrow="Published works" title="Books by Philip Tate" />
+      <PageTitle eyebrow="Published works" title="Books by Philip Tate" image="/scenes/blue-ridge.webp" />
       <div className="mx-auto max-w-4xl divide-y px-5 py-12">
         {books.map((b) => (
           <Reveal key={b.slug}><article className="grid items-center gap-8 py-12 sm:grid-cols-[auto_1fr]">

@@ -17,6 +17,7 @@ export default function ContactPage() {
         eyebrow="Get in touch"
         title={`Contact ${author.name}`}
         intro="For book signings, talks, book clubs, or just to say hello. Every message is read personally."
+        image="/scenes/writers-study.webp"
       />
       <Reveal className="mx-auto grid max-w-5xl gap-12 px-5 py-16 md:grid-cols-[1fr_1.5fr]">
         <div className="space-y-6 text-xl">

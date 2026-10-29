@@ -2,23 +2,28 @@ import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Reveal } from "@/components/reveal";
+import { MainNav } from "@/components/main-nav";
 import { author, nav, type Book } from "@/lib/content";
 
 export const btn = (variant: "default" | "outline" = "default") =>
   cn(buttonVariants({ variant }), "h-auto rounded-md px-7 py-3 text-lg");
 
+function NavLinks({ className }: { className?: string }) {
+  return (
+    <nav aria-label="Main" className={cn("flex flex-wrap gap-x-6 gap-y-2 text-lg", className)}>
+      {nav.map((n) => (
+        <Link key={n.href} href={n.href} className="underline-offset-4 hover:text-primary hover:underline">{n.label}</Link>
+      ))}
+    </nav>
+  );
+}
+
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto max-w-6xl px-5 py-4 text-center">
-        <Link href="/" className="font-heading text-3xl font-semibold md:text-4xl">{author.name}</Link>
-        <p className="text-base text-muted-foreground">{author.roles}</p>
-        <nav aria-label="Main" className="mt-3 flex flex-wrap justify-center gap-x-7 gap-y-2 text-lg">
-          {nav.map((n) => (
-            <Link key={n.href} href={n.href} className="underline-offset-4 hover:text-primary hover:underline">{n.label}</Link>
-          ))}
-        </nav>
+    <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-5 py-4 lg:flex-row lg:justify-between">
+        <Link href="/" className="font-heading text-3xl font-semibold">{author.name}</Link>
+        <MainNav />
       </div>
     </header>
   );
@@ -26,21 +31,56 @@ export function SiteHeader() {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t px-5 py-8 text-center text-lg text-muted-foreground">
-      © 2026 {author.name} · <a href={`mailto:${author.email}`} className="underline underline-offset-4">{author.email}</a>
+    <footer className="bg-primary px-5 py-12 text-primary-foreground">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center">
+        <p className="font-heading text-3xl font-semibold">{author.name}</p>
+        <NavLinks className="justify-center [&_a:hover]:text-primary-foreground" />
+        <p className="text-base opacity-90">
+          © 2026 {author.name} · <a href={`mailto:${author.email}`} className="underline underline-offset-4">{author.email}</a>
+        </p>
+      </div>
     </footer>
   );
 }
 
-// Title block for inner pages.
-export function PageTitle({ eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string }) {
+// Full-bleed scene photo behind a section, with a dark overlay so white text stays readable.
+// The parent needs `relative overflow-hidden`; put content in a `relative` wrapper above it.
+export function SceneBg({ src, preload, className = "bg-black/60" }: { src: string; preload?: boolean; className?: string }) {
   return (
-    <div className="bg-muted px-5 py-16 text-center md:py-20">
-      <Reveal>
-        {eyebrow && <p className="text-lg font-semibold text-primary">{eyebrow}</p>}
+    <>
+      <Image src={src} alt="" fill sizes="100vw" preload={preload} className="object-cover" />
+      <div aria-hidden className={cn("absolute inset-0", className)} />
+    </>
+  );
+}
+
+// White button with the Amazon logo, e.g. "Paperback on [amazon]".
+export function AmazonButton({ href, label, className }: { href: string; label: string; className?: string }) {
+  const format = label.replace(/\s*on Amazon$/i, "");
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cn("inline-flex items-center gap-2.5 rounded-md border border-black/10 bg-white px-6 py-3 text-lg font-medium text-foreground shadow-sm hover:bg-neutral-100", className)}
+    >
+      <span>{format && format !== label ? `${format} on` : "Buy on"}</span>
+      <Image src="/amazon-logo.png" alt="Amazon" width={102} height={31} className="mt-1.5 h-6 w-auto" />
+    </a>
+  );
+}
+
+// Title block for inner pages. With `image`, it sits on a scene photo.
+export function PageTitle({ eyebrow, title, intro, image }: { eyebrow?: string; title: string; intro?: string; image?: string }) {
+  return (
+    <div className={cn("relative overflow-hidden px-5 py-16 text-center md:py-24", image ? "text-white" : "bg-muted")}>
+      {image && <SceneBg src={image} preload />}
+      {/* No fade-in: page titles are above the fold and should show immediately. */}
+      <div className="relative">
+        {eyebrow && <p className={cn("text-lg font-semibold", image ? "uppercase tracking-wide" : "text-primary")}>{eyebrow}</p>}
         <h1 className="mt-2 font-heading text-5xl leading-tight md:text-6xl">{title}</h1>
-        {intro && <p className="mx-auto mt-4 max-w-2xl text-xl text-muted-foreground">{intro}</p>}
-      </Reveal>
+        {intro && <p className={cn("mx-auto mt-4 max-w-2xl text-xl", image ? "opacity-90" : "text-muted-foreground")}>{intro}</p>}
+      </div>
     </div>
   );
 }

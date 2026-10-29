@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <main>
-      <PageTitle eyebrow="Reflections" title="Blog" intro="Thoughts on writing, family, and healing." />
+      <PageTitle eyebrow="Reflections" title="Blog" intro="Thoughts on writing, the mountains, the water, and faith." image="/scenes/writers-study.webp" />
       <div className="mx-auto max-w-3xl divide-y px-5 py-8">
         {posts.map((p) => (
           <Reveal key={p.slug}><article className="py-10">

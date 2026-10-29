@@ -6,6 +6,7 @@ export const author = {
   roles: "Author · Minister · Storyteller",
   email: "hello@philiptate.com", // TODO: real contact email
   photo: "/philip-tate.png",
+  amazonUrl: "https://www.amazon.com/s?i=digital-text&rh=p_27%3APhilip%2BTate&text=Philip+Tate",
 };
 
 export const nav = [
@@ -13,7 +14,6 @@ export const nav = [
   { label: "About Me", href: "/#author" },
   { label: "Books", href: "/books" },
   { label: "Blog", href: "/blog" },
-  { label: "Press", href: "/#press" },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -23,6 +23,7 @@ export type Book = {
   subtitle: string;
   genre: string;
   cover?: string;
+  heroImage: string; // carousel background, public/hero/<slug>.webp
   summary: string;
   description: string[];
   details: { label: string; value: string }[];
@@ -33,10 +34,11 @@ export type Book = {
 export const books: Book[] = [
   {
     slug: "thwarted-enemy",
+    heroImage: "/hero/thwarted-enemy.webp",
     title: "Thwarted Enemy",
     subtitle: "The Chosen's Atonement",
     genre: "Fiction",
-    cover: "https://m.media-amazon.com/images/I/71MI+d2FALL._SL1500_.jpg",
+    cover: "/covers/thwarted-enemy.png",
     summary: "The newest book from Philip J. Tate, available now on Kindle.",
     description: [
       // TODO: Amazon blocked the product page; paste the official book description here.
@@ -50,6 +52,7 @@ export const books: Book[] = [
   },
   {
     slug: "rizzoes-landing",
+    heroImage: "/hero/rizzoes-landing.webp",
     title: "Rizzoes' Landing",
     subtitle: "A Novel of Suspense",
     genre: "Mystery & Suspense",
@@ -74,6 +77,7 @@ export const books: Book[] = [
   },
   {
     slug: "chinas-global-naval-ambitions",
+    heroImage: "/hero/chinas-global-naval-ambitions.webp",
     title: "China's Global Naval Ambitions",
     subtitle: "And Her Unstoppable Rise to Power",
     genre: "Nonfiction · Defense",
@@ -97,6 +101,7 @@ export const books: Book[] = [
   },
   {
     slug: "singing-reels-sunburn",
+    heroImage: "/hero/singing-reels-sunburn.webp",
     title: "Singing Reels",
     subtitle: "Sunburn",
     genre: "Adventure",
@@ -116,6 +121,7 @@ export const books: Book[] = [
   },
   {
     slug: "breach-of-trust",
+    heroImage: "/hero/breach-of-trust.webp",
     title: "Breach of Trust",
     subtitle: "A Tale of Asheville in the Civil War",
     genre: "Historical Fiction",
@@ -146,21 +152,19 @@ export const book = books.find((b) => b.slug === "breach-of-trust")!;
 export const welcome = {
   eyebrow: "Welcome",
   paragraphs: [
-    "I grew up in the foothills of the Blue Ridge Mountains, in the countryside of the Catawba River Valley.",
-    "Woodlands, trout streams, and the waters that feed Lake James. Front porches and long stories.",
-    "Those hills taught me that every place has its secrets, and every person carries a story worth telling.",
+    "Every place has its secrets, and every person carries a story worth telling.",
     "My name is Philip Tate. I write mountain tales, mysteries, adventures, and serious books about the world we live in.",
+    "Here you'll find a Civil War mystery set in old Asheville, a suspense novel set in a small, close-knit community, a fishing adventure, and a close look at China's growing navy.",
   ],
   closing: "Pull up a chair. There's a story waiting.",
 };
 
 export const aboutAuthor = {
   eyebrow: "From the author",
+  // Kept short on purpose; the full story lives in the "A Life of Service" facts card.
   paragraphs: [
-    "I was born in Atlanta, Georgia, and lived in Sandy Springs until I was five, when my family moved to Marion, North Carolina, 45 miles east of Asheville. I grew up hunting and fishing the woods and waters of the Catawba River Valley, and I was active in Boy Scouts and all things high school.",
-    "At UNC Chapel Hill I was introduced to literature, law, geology, history, and politics, and I served in Navy ROTC as a Midshipman. After graduating I joined my family's insurance business.",
-    "Over the years I served with the Red Cross, EMS, and as a paramedic, and on hospital, school, and church boards. Later in my career I was called to ministry, and I am now in my ninth year as a Methodist minister.",
-    "My wife Kay and I live between Marion and Land Harbor in Linville. When I'm not writing, you'll find me trout fishing, playing golf, tennis, or pickleball, taking photographs, studying rocks, picking bluegrass guitar, or on the ham radio.",
+    "I grew up in Marion, North Carolina, hunting and fishing the Catawba River Valley. After UNC Chapel Hill, I joined my family's insurance business and served as a paramedic, and today I am a Methodist minister.",
+    "My wife Kay and I live between Marion and Linville. When I'm not writing, you'll find me trout fishing or picking bluegrass guitar.",
   ],
   href: "/books",
 };
@@ -176,6 +180,14 @@ export const life = {
     "Before I was a writer, I was an insurance agent, a paramedic, a school board member, and a neighbor. Those years put me beside people on their best days and their hardest ones.",
     "Today I serve as a Methodist minister, and I write books of all kinds: mountain tales, mysteries, adventures, books for young readers, and serious books on defense and world affairs.",
     "Every story comes back to the people and places of these mountains.",
+  ],
+  facts: [
+    { label: "Born", value: "Atlanta, Georgia" },
+    { label: "Raised", value: "Marion, NC, in the Catawba River Valley" },
+    { label: "Studied", value: "UNC Chapel Hill, Navy ROTC Midshipman" },
+    { label: "Calling", value: "Methodist minister, now in his ninth year" },
+    { label: "Home", value: "Marion and Land Harbor in Linville, with his wife Kay" },
+    { label: "Loves", value: "Trout fishing, bluegrass guitar, ham radio, and pickleball" },
   ],
 };
 
