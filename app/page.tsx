@@ -44,19 +44,36 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Featured video, edge to edge */}
-      <section aria-label={video.title} className="bg-black">
-        <VideoSlot url={video.url} title={video.title} poster={video.poster} className="max-h-[85vh] rounded-none shadow-none" />
+      {/* Featured video: framed and centred, sitting half on a mint band (as in the reference) */}
+      <section aria-label={video.title} className="bg-[linear-gradient(to_bottom,var(--mint)_60%,white_60%)] px-5 pt-20 pb-16 md:pt-24 md:pb-20">
+        <Reveal className="mx-auto max-w-5xl">
+          <p className="text-center font-heading text-3xl font-semibold uppercase tracking-wider text-forest md:text-4xl">{video.title}</p>
+          <div className="mt-10 rounded-xl bg-white p-2 shadow-2xl md:p-3">
+            <VideoSlot url={video.url} title={video.title} poster={video.poster} className="rounded-lg shadow-none" />
+          </div>
+        </Reveal>
       </section>
 
-      {/* Author, on a mint band like the reference site */}
-      <section className="bg-mint px-5 py-20 md:py-28">
-        <Row id="author" media={<Image src={author.photo} alt={`Portrait of ${author.name}`} width={640} height={600} className="w-full max-w-md rounded-lg shadow-lg" />}>
-          <Eyebrow>{aboutAuthor.eyebrow}</Eyebrow>
-          <h2 className="mt-2 font-heading text-4xl md:text-5xl">{author.name}</h2>
-          <div className="mt-5"><Prose paragraphs={aboutAuthor.paragraphs} /></div>
-          <Link href={aboutAuthor.href} className={cn(btn(), "mt-8")}>See my books</Link>
-        </Row>
+      {/* From the author: title above a green panel with the photo inside it (as in the reference) */}
+      <section id="author" className="scroll-mt-32 bg-mint px-5 py-20 md:py-28">
+        <Reveal className="mx-auto max-w-6xl">
+          <h2 className="text-center font-heading text-3xl font-semibold uppercase tracking-wider text-forest md:text-4xl">{aboutAuthor.eyebrow}</h2>
+          <div className="relative mt-12 rounded-2xl bg-forest p-8 text-white shadow-xl md:grid md:grid-cols-[auto_1fr] md:items-center md:gap-12 md:p-12">
+            <div aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.12),transparent_55%)]" />
+            <Image
+              src={author.photo}
+              alt={`Portrait of ${author.name}`}
+              width={640}
+              height={600}
+              className="relative mx-auto w-full max-w-xs rounded-lg shadow-2xl ring-4 ring-white/80 md:w-80 md:max-w-none"
+            />
+            <div className="relative mt-8 md:mt-0">
+              <h3 className="font-heading text-3xl uppercase tracking-wide md:text-4xl">{author.name}</h3>
+              <div className="mt-5"><Prose paragraphs={aboutAuthor.paragraphs} /></div>
+              <Link href={aboutAuthor.href} className={cn(btn(), "mt-8")}>See my books</Link>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* Where to buy, over the Blue Ridge vista */}

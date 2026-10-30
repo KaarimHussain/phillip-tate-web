@@ -10,18 +10,14 @@ export function youTubeId(url: string) {
   return url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([\w-]{11})/)?.[1];
 }
 
-// One featured video. YouTube loads only after the visitor presses play, so the page stays fast;
-// an MP4 path uses the browser's own player. With no url, shows a "coming soon" poster.
+// One featured video (YouTube link or MP4 path). Shows a poster with a play button and only
+// loads the video once pressed, so the page stays fast. With no url, shows "coming soon".
 export function VideoSlot({ url, title, poster, className }: { url: string; title: string; poster: string; className?: string }) {
   const [playing, setPlaying] = useState(false);
   const yt = youTubeId(url);
   const frame = cn("relative aspect-video w-full overflow-hidden rounded-lg bg-black shadow-xl", className);
 
-  if (url && !yt) {
-    return <video src={url} poster={poster} controls preload="none" className={frame} aria-label={title} />;
-  }
-
-  if (yt && playing) {
+  if (playing && yt) {
     return (
       <div className={frame}>
         <iframe
@@ -34,30 +30,33 @@ export function VideoSlot({ url, title, poster, className }: { url: string; titl
       </div>
     );
   }
+  if (playing) {
+    return <video src={url} poster={poster} controls autoPlay playsInline className={frame} aria-label={title} />;
+  }
 
-  const ready = Boolean(yt);
+  const ready = Boolean(url);
   return (
     <button
       type="button"
       onClick={() => ready && setPlaying(true)}
       disabled={!ready}
       aria-label={ready ? `Play video: ${title}` : `${title}: video coming soon`}
-      className={`group ${frame} text-left text-white`}
+      className={cn("group text-left text-white", frame)}
     >
       <Image
         src={yt ? `https://i.ytimg.com/vi/${yt}/hqdefault.jpg` : poster}
         alt=""
         fill
-        sizes="100vw"
+        sizes="(min-width: 1024px) 1024px, 100vw"
         className="object-cover"
         unoptimized={Boolean(yt)}
       />
-      <span className="absolute inset-0 bg-black/45 transition-colors group-hover:bg-black/35" />
+      <span className="absolute inset-0 bg-black/25 transition-colors group-hover:bg-black/15" />
       <span className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <span className="flex size-20 md:size-28 items-center justify-center rounded-full bg-white/90 text-primary shadow-lg transition-transform group-hover:scale-105">
-          <Play className="ml-1 size-9 fill-current md:size-12" />
+        <span className="flex size-20 items-center justify-center rounded-full bg-primary text-white shadow-xl ring-8 ring-white/30 transition-transform group-hover:scale-105 md:size-24">
+          <Play className="ml-1 size-9 fill-current md:size-10" />
         </span>
-        <span className="text-xl font-medium md:text-2xl">{ready ? title : "Video coming soon"}</span>
+        {!ready && <span className="text-xl font-medium md:text-2xl">Video coming soon</span>}
       </span>
     </button>
   );

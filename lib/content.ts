@@ -160,9 +160,9 @@ export const welcome = {
 // Featured video in the Welcome section. Paste a YouTube link (any format) or an MP4 path
 // such as "/videos/welcome.mp4" (file in public/videos). Leave empty to show "coming soon".
 export const video = {
-  url: "",
-  title: "A word from Philip",
-  poster: "/scenes/blue-ridge.webp",
+  url: "/videos/philip-tate-bio.mp4",
+  title: "Meet Philip Tate",
+  poster: "/videos/philip-tate-bio-poster.webp",
 };
 
 export const aboutAuthor = {
